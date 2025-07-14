@@ -29,7 +29,8 @@ export const additionalPhysicsQuestions = [
     questTitle: "Race Track Physics",
     question: "A race car travels 240 meters in 8 seconds. What is its average speed?",
     type: 'text-input' as const,
-    correctAnswer: "30",
+    options: ['30 m/s', '60 m/s', '120 m/s', '140 m/s'],
+    correctAnswer: '30 m/s',
     explanation: 'Speed = Distance ÷ Time. So 240 meters ÷ 8 seconds = 30 meters per second.',
     difficulty: 'Intermediate',
     tags: ['speed', 'motion', 'calculation']
@@ -40,6 +41,7 @@ export const additionalPhysicsQuestions = [
     question: "Drag the arrows to show the direction of force and motion when a child slides down a slide.",
     type: 'drag-drop' as const,
     correctAnswer: 2,
+    options: ['Down the slide', 'Up the slide', 'Against the slide'],
     explanation: 'Gravity pulls the child downward, while friction opposes the motion. The net force causes the child to accelerate down the slide.',
     difficulty: 'Beginner',
     tags: ['forces', 'gravity', 'friction', 'motion']

@@ -149,7 +149,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
             <div className="flex justify-between items-center">
               <div>
                 <h2 className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
-                  Physics Quiz Center
+                  Quiz Center
                 </h2>
                 <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   Current accuracy: {userAccuracy}% • {completedTopics.length} topics mastered

@@ -19,7 +19,8 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children, currentTab, onTab
     { id: 'marketplace', icon: ShoppingBag, label: 'Shop' },
     { id: 'profile', icon: User, label: 'Profile' },
   ];
-
+  console.log(notifications);
+  
   const unreadCount = notifications.filter(n => !n.isRead).length;
 
   return (

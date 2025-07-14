@@ -8,6 +8,7 @@ import AuthModal from './components/AuthModal';
 import TeacherDashboard from './components/TeacherDashboard';
 import RoleSelector from './components/RoleSelector';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { useAuth } from './contexts/AuthContext';
 import { useRoles } from './hooks/useRoles';
 import { subjects, createYearLevels } from './data/lessons';
@@ -253,7 +254,9 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
     </AuthProvider>
   );
 }

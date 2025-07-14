@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ArrowLeft, CheckCircle, Clock, Book, ChevronRight, ChevronLeft, Star, Zap } from 'lucide-react';
 import { Lesson, LessonContent } from '../types';
 import { useProgress } from '../hooks/useProgress';
+import { useTheme } from '../contexts/ThemeContext';
+import ThemeSelector from './ThemeSelector';
 
 interface LessonPageProps {
   lesson: Lesson;
@@ -26,6 +28,7 @@ const LessonPage: React.FC<LessonPageProps> = ({
   hasNext,
   hasPrevious
 }) => {
+  const { currentTheme } = useTheme();
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
   const [showExplanation, setShowExplanation] = useState(false);
@@ -73,19 +76,14 @@ const LessonPage: React.FC<LessonPageProps> = ({
     }
   };
 
-  const realmTheme = subjectId === 'mathematics' 
-    ? {
-        gradient: 'from-blue-100 via-cyan-100 to-teal-100',
-        headerGradient: 'from-blue-600 via-cyan-600 to-teal-600',
-        border: 'border-blue-400',
-        emoji: '🔢'
-      }
-    : {
-        gradient: 'from-green-100 via-emerald-100 to-lime-100',
-        headerGradient: 'from-green-600 via-emerald-600 to-lime-600',
-        border: 'border-green-400',
-        emoji: '📚'
-      };
+  const subjectTheme = currentTheme.subjects[subjectId as keyof typeof currentTheme.subjects] || currentTheme.subjects.mathematics;
+  
+  const realmTheme = {
+    gradient: subjectTheme.gradient,
+    headerGradient: subjectTheme.headerGradient,
+    border: subjectTheme.border,
+    emoji: subjectTheme.emoji
+  };
 
   const renderContent = (content: LessonContent) => {
     switch (content.type) {
@@ -373,6 +371,9 @@ const LessonPage: React.FC<LessonPageProps> = ({
           </div>
         )}
       </main>
+      
+      {/* Theme Selector */}
+      <ThemeSelector />
     </div>
   );
 };

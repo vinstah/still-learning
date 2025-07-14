@@ -2,6 +2,8 @@ import React from 'react';
 import { ArrowLeft, Clock, Play, FileText, Trophy, CheckCircle, Star, Sword, Shield, Crown } from 'lucide-react';
 import { YearLevel, Subject } from '../types';
 import { useProgress } from '../hooks/useProgress';
+import { useTheme } from '../contexts/ThemeContext';
+import ThemeSelector from './ThemeSelector';
 
 interface YearPageProps {
   yearLevel: YearLevel;
@@ -18,6 +20,7 @@ const YearPage: React.FC<YearPageProps> = ({
   onLessonSelect,
   onExamStart
 }) => {
+  const { currentTheme } = useTheme();
   const { isLessonCompleted, getSubjectProgress, getExamScore } = useProgress();
 
   const getDifficultyColor = (difficulty: string) => {
@@ -43,21 +46,15 @@ const YearPage: React.FC<YearPageProps> = ({
   const progressPercentage = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
   const examScore = getExamScore(subject.id, yearLevel.year);
 
-  const realmTheme = subject.id === 'mathematics' 
-    ? {
-        gradient: 'from-blue-100 via-cyan-100 to-teal-100',
-        headerGradient: 'from-blue-600 via-cyan-600 to-teal-600',
-        border: 'border-blue-400',
-        emoji: '🔢',
-        title: 'Mathematics Realm'
-      }
-    : {
-        gradient: 'from-green-100 via-emerald-100 to-lime-100',
-        headerGradient: 'from-green-600 via-emerald-600 to-lime-600',
-        border: 'border-green-400',
-        emoji: '📚',
-        title: 'English Kingdom'
-      };
+  const subjectTheme = currentTheme.subjects[subject.id as keyof typeof currentTheme.subjects] || currentTheme.subjects.mathematics;
+  
+  const realmTheme = {
+    gradient: subjectTheme.gradient,
+    headerGradient: subjectTheme.headerGradient,
+    border: subjectTheme.border,
+    emoji: subjectTheme.emoji,
+    title: subjectTheme.title
+  };
 
   return (
     <div className={`min-h-screen bg-gradient-to-b ${realmTheme.gradient} relative overflow-hidden`}>
@@ -315,6 +312,9 @@ const YearPage: React.FC<YearPageProps> = ({
           </div>
         </div>
       </main>
+      
+      {/* Theme Selector */}
+      <ThemeSelector />
     </div>
   );
 };

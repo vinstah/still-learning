@@ -23,8 +23,8 @@ const HomeScreen: React.FC = () => {
       content: {
         type: 'math',
         questions: [
-          { id: '1', text: 'What is 15 + 27?', correctAnswer: 42, points: 10 },
-          { id: '2', text: 'What is 8 × 9?', correctAnswer: 72, points: 15 },
+          { id: '1', text: 'What is 15 + 27?', correctAnswer: '42', points: 10 },
+          { id: '2', text: 'What is 8 × 9?', correctAnswer: '72', points: 15 },
         ]
       }
     },

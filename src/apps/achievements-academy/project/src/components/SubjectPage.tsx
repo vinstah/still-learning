@@ -1,6 +1,8 @@
 import React from 'react';
 import { ArrowLeft, Clock, Star, BookOpen, FileText, Crown, Sword, Shield } from 'lucide-react';
 import { Subject, YearLevel } from '../types';
+import { useTheme } from '../contexts/ThemeContext';
+import ThemeSelector from './ThemeSelector';
 
 interface SubjectPageProps {
   subject: Subject;
@@ -15,6 +17,8 @@ const SubjectPage: React.FC<SubjectPageProps> = ({
   onBack, 
   onYearSelect 
 }) => {
+  const { currentTheme } = useTheme();
+  
   const getDifficultyColor = (year: number) => {
     if (year <= 3) return 'from-green-400 to-emerald-500';
     if (year <= 8) return 'from-yellow-400 to-orange-500';
@@ -33,23 +37,18 @@ const SubjectPage: React.FC<SubjectPageProps> = ({
     return Crown;
   };
 
-  const realmTheme = subject.id === 'mathematics' 
-    ? {
-        gradient: 'from-blue-100 via-cyan-100 to-teal-100',
-        headerGradient: 'from-blue-600 via-cyan-600 to-teal-600',
-        border: 'border-blue-400',
-        emoji: '🔢',
-        title: 'Mathematics Realm',
-        description: 'Master the ancient arts of numbers and magical calculations'
-      }
-    : {
-        gradient: 'from-green-100 via-emerald-100 to-lime-100',
-        headerGradient: 'from-green-600 via-emerald-600 to-lime-600',
-        border: 'border-green-400',
-        emoji: '📚',
-        title: 'English Kingdom',
-        description: 'Explore the enchanted world of words and stories'
-      };
+  const subjectTheme = currentTheme.subjects[subject.id as keyof typeof currentTheme.subjects] || currentTheme.subjects.mathematics;
+  
+  const realmTheme = {
+    gradient: subjectTheme.gradient,
+    headerGradient: subjectTheme.headerGradient,
+    border: subjectTheme.border,
+    emoji: subjectTheme.emoji,
+    title: subjectTheme.title,
+    description: subject.id === 'mathematics' 
+      ? 'Master the ancient arts of numbers and magical calculations'
+      : 'Explore the enchanted world of words and stories'
+  };
 
   return (
     <div className={`min-h-screen bg-gradient-to-b ${realmTheme.gradient} relative overflow-hidden`}>
@@ -249,6 +248,9 @@ const SubjectPage: React.FC<SubjectPageProps> = ({
           </p>
         </div>
       </main>
+      
+      {/* Theme Selector */}
+      <ThemeSelector />
     </div>
   );
 };

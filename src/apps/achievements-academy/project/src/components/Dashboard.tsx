@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { BookOpen, Calculator, Award, TrendingUp, LogIn, Sword, Shield, Star, Crown, Zap, HelpCircle } from 'lucide-react';
 import { Subject } from '../types';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { useProgress } from '../hooks/useProgress';
 import UserMenu from './UserMenu';
 import HelpGuide from './HelpGuide';
+import ThemeSelector from './ThemeSelector';
 
 interface DashboardProps {
   subjects: Subject[];
@@ -14,6 +16,7 @@ interface DashboardProps {
 
 const Dashboard: React.FC<DashboardProps> = ({ subjects, onSubjectSelect, onAuthRequired }) => {
   const { user } = useAuth();
+  const { currentTheme } = useTheme();
   const { progress, examScores, loading } = useProgress();
   const [showHelpGuide, setShowHelpGuide] = useState(false);
 
@@ -41,7 +44,7 @@ const Dashboard: React.FC<DashboardProps> = ({ subjects, onSubjectSelect, onAuth
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
+    <div className={`min-h-screen bg-gradient-to-b ${currentTheme.gradients.background} relative overflow-hidden`}>
       {/* Fantasy Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-16 h-16 sm:w-32 sm:h-32 bg-amber-400 rounded-full blur-3xl"></div>
@@ -55,7 +58,7 @@ const Dashboard: React.FC<DashboardProps> = ({ subjects, onSubjectSelect, onAuth
       <div className="absolute inset-1 sm:inset-2 border-2 sm:border-4 border-slate-300 pointer-events-none"></div>
 
       {/* Header */}
-      <header className="relative bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 shadow-2xl border-b-2 sm:border-b-4 border-slate-600">
+      <header className={`relative bg-gradient-to-r ${currentTheme.gradients.header} shadow-2xl border-b-2 sm:border-b-4 border-slate-600`}>
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6">
           <div className="flex items-center justify-between">
@@ -201,23 +204,18 @@ const Dashboard: React.FC<DashboardProps> = ({ subjects, onSubjectSelect, onAuth
             const IconComponent = subject.icon === 'Calculator' ? Calculator : BookOpen;
             const subjectProgress = user ? progress.filter(p => p.subjectId === subject.id && p.completed).length : 0;
             
-            const realmTheme = subject.id === 'mathematics' 
-              ? {
-                  gradient: 'from-cyan-50 via-blue-50 to-indigo-50',
-                  border: 'border-cyan-200',
-                  iconBg: 'from-cyan-600 to-blue-700',
-                  emoji: '🔢',
-                  title: 'Mathematics Realm',
-                  description: 'Master the ancient arts of numbers, calculations, and magical formulas!'
-                }
-              : {
-                  gradient: 'from-emerald-50 via-teal-50 to-green-50',
-                  border: 'border-emerald-200',
-                  iconBg: 'from-emerald-600 to-teal-700',
-                  emoji: '📚',
-                  title: 'English Kingdom',
-                  description: 'Explore the enchanted world of words, stories, and communication spells!'
-                };
+            const subjectTheme = currentTheme.subjects[subject.id as keyof typeof currentTheme.subjects] || currentTheme.subjects.mathematics;
+            
+            const realmTheme = {
+              gradient: subjectTheme.gradient,
+              border: subjectTheme.border,
+              iconBg: subjectTheme.headerGradient,
+              emoji: subjectTheme.emoji,
+              title: subjectTheme.title,
+              description: subject.id === 'mathematics' 
+                ? 'Master the ancient arts of numbers, calculations, and magical formulas!'
+                : 'Explore the enchanted world of words, stories, and communication spells!'
+            };
             
             return (
               <div
@@ -327,6 +325,9 @@ const Dashboard: React.FC<DashboardProps> = ({ subjects, onSubjectSelect, onAuth
 
       {/* Help Guide Modal */}
       <HelpGuide isOpen={showHelpGuide} onClose={() => setShowHelpGuide(false)} />
+      
+      {/* Theme Selector */}
+      <ThemeSelector />
     </div>
   );
 };

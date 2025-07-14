@@ -598,7 +598,7 @@ export const themes = {
 };
 
 // Default theme
-export const currentTheme = oceanTheme;
+export const currentTheme = sunsetTheme;
 
 // Theme utility functions
 export const getThemeColors = (theme: ColorTheme = currentTheme) => theme.colors;

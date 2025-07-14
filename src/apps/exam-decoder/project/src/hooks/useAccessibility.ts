@@ -82,6 +82,7 @@ export function useAccessibility() {
   const handleKeyboardNavigation = useCallback((event: KeyboardEvent) => {
     if (!settings.keyboardNavigation) return;
 
+    const activeElement = document.activeElement as HTMLElement;
     // Add custom keyboard navigation logic here
     switch (event.key) {
       case 'Tab':
@@ -90,7 +91,6 @@ export function useAccessibility() {
         break;
       case 'Escape':
         // Close modals, dropdowns, etc.
-        const activeElement = document.activeElement as HTMLElement;
         if (activeElement && activeElement.blur) {
           activeElement.blur();
         }

@@ -24,9 +24,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       {/* <App /> */}
-      {/* <AchievementAcademy /> */}
+      <AchievementAcademy />
       {/* <Algebra /> */}
-      <BaseLearning />
+      {/* <BaseLearning /> */}
       {/* <EngineeringForKids /> */}
       {/* <ExamDecoder /> */}
       {/* <Laino /> */}
