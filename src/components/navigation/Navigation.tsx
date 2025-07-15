@@ -23,11 +23,11 @@ export const Navigation: React.FC<NavigationProps> = ({
 
   return (
     <nav className={`
-      fixed bottom-0 left-0 right-0 p-4
+      bottom-0 left-0 right-0 p-4
       ${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}
       border-t backdrop-blur-sm
     `}>
-      <div className="flex justify-center space-x-8 max-w-md mx-auto">
+      <div className="flex justify-center space-x-6 max-w-md mx-auto">
         <button
           onClick={() => onViewChange('home')}
           className={getButtonClass('home')}

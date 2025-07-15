@@ -4,4 +4,4 @@ export interface AppSettings {
   voiceInputEnabled: boolean;
 }
 
-export type ViewType = 'home' | 'lessons' | 'lesson' | 'quiz' | 'badges' | 'dashboard' | 'teacher' | 'settings';
+export type ViewType = '' | 'home' | 'lessons' | 'lesson' | 'quiz' | 'badges' | 'dashboard' | 'teacher' | 'settings';

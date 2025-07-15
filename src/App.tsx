@@ -9,7 +9,6 @@ import { BadgesView } from './components/views/BadgesView';
 import { DashboardView } from './components/views/DashboardView';
 import { TeacherView } from './components/views/TeacherView';
 import { SettingsView } from './components/views/SettingsView';
-import { Navigation } from './components/navigation/Navigation';
 import { questionsByTopic } from './data/questions';
 import { physicsLessons, getLessonById } from './data/lessons';
 import { useViewStore, useUserStore, useSettingsStore, useQuizStore } from './store';
@@ -17,7 +16,6 @@ import { useAppHandlers } from './hooks/useAppHandlers';
 
 function App() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   // View state - only keep what's needed for routing
   const {
@@ -227,14 +225,11 @@ function App() {
                 onSettingsChange={(settings) => updateSettings(settings)}
               />
             } />
+            
           </Routes>
         </main>
         
-        <Navigation
-          currentView={(location.pathname.slice(1) || 'home') as any}
-          isDark={appSettings.isDark}
-          onViewChange={(view) => navigate(`/${view}`)}
-        />
+       
         
         <BadgeNotification
           badges={newBadges}

@@ -1,0 +1,239 @@
+/* Theme CSS Custom Properties */
+/* These will be dynamically updated by the theme context */
+
+:root {
+  /* Default theme (Sunset Magic) */
+  --theme-primary-50: #fdf2f8;
+  --theme-primary-100: #fce7f3;
+  --theme-primary-200: #fbcfe8;
+  --theme-primary-300: #f9a8d4;
+  --theme-primary-400: #f472b6;
+  --theme-primary-500: #ec4899;
+  --theme-primary-600: #db2777;
+  --theme-primary-700: #be185d;
+  --theme-primary-800: #9d174d;
+  --theme-primary-900: #831843;
+
+  --theme-secondary-50: #fff7ed;
+  --theme-secondary-100: #ffedd5;
+  --theme-secondary-200: #fed7aa;
+  --theme-secondary-300: #fdba74;
+  --theme-secondary-400: #fb923c;
+  --theme-secondary-500: #f97316;
+  --theme-secondary-600: #ea580c;
+  --theme-secondary-700: #c2410c;
+  --theme-secondary-800: #9a3412;
+  --theme-secondary-900: #7c2d12;
+
+  --theme-accent-50: #fefce8;
+  --theme-accent-100: #fef9c3;
+  --theme-accent-200: #fef08a;
+  --theme-accent-300: #fde047;
+  --theme-accent-400: #facc15;
+  --theme-accent-500: #eab308;
+  --theme-accent-600: #ca8a04;
+  --theme-accent-700: #a16207;
+  --theme-accent-800: #854d0e;
+  --theme-accent-900: #713f12;
+
+  --theme-success-50: #f0fdf4;
+  --theme-success-100: #dcfce7;
+  --theme-success-200: #bbf7d0;
+  --theme-success-300: #86efac;
+  --theme-success-400: #4ade80;
+  --theme-success-500: #22c55e;
+  --theme-success-600: #16a34a;
+  --theme-success-700: #15803d;
+  --theme-success-800: #166534;
+  --theme-success-900: #14532d;
+
+  --theme-warning-50: #fffbeb;
+  --theme-warning-100: #fef3c7;
+  --theme-warning-200: #fde68a;
+  --theme-warning-300: #fcd34d;
+  --theme-warning-400: #fbbf24;
+  --theme-warning-500: #f59e0b;
+  --theme-warning-600: #d97706;
+  --theme-warning-700: #b45309;
+  --theme-warning-800: #92400e;
+  --theme-warning-900: #78350f;
+
+  --theme-error-50: #fef2f2;
+  --theme-error-100: #fee2e2;
+  --theme-error-200: #fecaca;
+  --theme-error-300: #fca5a5;
+  --theme-error-400: #f87171;
+  --theme-error-500: #ef4444;
+  --theme-error-600: #dc2626;
+  --theme-error-700: #b91c1c;
+  --theme-error-800: #991b1b;
+  --theme-error-900: #7f1d1d;
+
+  --theme-neutral-50: #fafaf9;
+  --theme-neutral-100: #f5f5f4;
+  --theme-neutral-200: #e7e5e4;
+  --theme-neutral-300: #d6d3d1;
+  --theme-neutral-400: #a8a29e;
+  --theme-neutral-500: #78716c;
+  --theme-neutral-600: #57534e;
+  --theme-neutral-700: #44403c;
+  --theme-neutral-800: #292524;
+  --theme-neutral-900: #1c1917;
+
+  /* Gradient definitions */
+  --theme-gradient-primary: linear-gradient(to right, var(--theme-primary-600), var(--theme-primary-700));
+  --theme-gradient-secondary: linear-gradient(to right, var(--theme-secondary-600), var(--theme-secondary-700));
+  --theme-gradient-accent: linear-gradient(to right, var(--theme-accent-500), var(--theme-accent-600));
+  --theme-gradient-success: linear-gradient(to right, var(--theme-success-600), var(--theme-success-700));
+  --theme-gradient-warning: linear-gradient(to right, var(--theme-warning-500), var(--theme-warning-600));
+  --theme-gradient-error: linear-gradient(to right, var(--theme-error-500), var(--theme-error-600));
+  --theme-gradient-background: linear-gradient(to bottom, var(--theme-neutral-50), var(--theme-primary-50), var(--theme-secondary-50));
+  --theme-gradient-header: linear-gradient(to right, var(--theme-neutral-800), var(--theme-neutral-700), var(--theme-neutral-800));
+
+  /* Subject-specific gradients */
+  --theme-subject-mathematics-gradient: linear-gradient(to bottom, var(--theme-primary-100), var(--theme-secondary-100), var(--theme-accent-100));
+  --theme-subject-mathematics-header: linear-gradient(to right, var(--theme-primary-600), var(--theme-secondary-600), var(--theme-accent-600));
+  --theme-subject-english-gradient: linear-gradient(to bottom, var(--theme-success-100), var(--theme-accent-100), var(--theme-primary-100));
+  --theme-subject-english-header: linear-gradient(to right, var(--theme-success-600), var(--theme-accent-600), var(--theme-primary-600));
+}
+
+/* Utility classes that use CSS custom properties */
+.theme-bg-primary {
+  background-color: var(--theme-primary-500);
+}
+
+.theme-bg-primary-light {
+  background-color: var(--theme-primary-100);
+}
+
+.theme-bg-secondary {
+  background-color: var(--theme-secondary-500);
+}
+
+.theme-bg-accent {
+  background-color: var(--theme-accent-500);
+}
+
+.theme-bg-success {
+  background-color: var(--theme-success-500);
+}
+
+.theme-bg-warning {
+  background-color: var(--theme-warning-500);
+}
+
+.theme-bg-error {
+  background-color: var(--theme-error-500);
+}
+
+.theme-bg-neutral {
+  background-color: var(--theme-neutral-500);
+}
+
+/* Gradient utilities */
+.theme-gradient-primary {
+  background: var(--theme-gradient-primary);
+}
+
+.theme-gradient-secondary {
+  background: var(--theme-gradient-secondary);
+}
+
+.theme-gradient-accent {
+  background: var(--theme-gradient-accent);
+}
+
+.theme-gradient-success {
+  background: var(--theme-gradient-success);
+}
+
+.theme-gradient-warning {
+  background: var(--theme-gradient-warning);
+}
+
+.theme-gradient-error {
+  background: var(--theme-gradient-error);
+}
+
+.theme-gradient-background {
+  background: var(--theme-gradient-background);
+}
+
+.theme-gradient-header {
+  background: var(--theme-gradient-header);
+}
+
+/* Subject-specific gradients */
+.theme-subject-mathematics {
+  background: var(--theme-subject-mathematics-gradient);
+}
+
+.theme-subject-mathematics-header {
+  background: var(--theme-subject-mathematics-header);
+}
+
+.theme-subject-english {
+  background: var(--theme-subject-english-gradient);
+}
+
+.theme-subject-english-header {
+  background: var(--theme-subject-english-header);
+}
+
+/* Text color utilities */
+.theme-text-primary {
+  color: var(--theme-primary-600);
+}
+
+.theme-text-secondary {
+  color: var(--theme-secondary-600);
+}
+
+.theme-text-accent {
+  color: var(--theme-accent-600);
+}
+
+.theme-text-success {
+  color: var(--theme-success-600);
+}
+
+.theme-text-warning {
+  color: var(--theme-warning-600);
+}
+
+.theme-text-error {
+  color: var(--theme-error-600);
+}
+
+.theme-text-neutral {
+  color: var(--theme-neutral-600);
+}
+
+/* Border utilities */
+.theme-border-primary {
+  border-color: var(--theme-primary-400);
+}
+
+.theme-border-secondary {
+  border-color: var(--theme-secondary-400);
+}
+
+.theme-border-accent {
+  border-color: var(--theme-accent-400);
+}
+
+.theme-border-success {
+  border-color: var(--theme-success-400);
+}
+
+.theme-border-warning {
+  border-color: var(--theme-warning-400);
+}
+
+.theme-border-error {
+  border-color: var(--theme-error-400);
+}
+
+.theme-border-neutral {
+  border-color: var(--theme-neutral-400);
+} 
