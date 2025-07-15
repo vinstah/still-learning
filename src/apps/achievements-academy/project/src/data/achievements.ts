@@ -29,17 +29,17 @@ export const getAchievements = (completedLessons: number, totalAchievements: num
   {
     id: 'scholar',
     name: 'Dedicated Scholar',
-    description: 'Complete 10 learning quests',
+    description: 'Complete 15 learning quests',
     icon: Star,
-    earned: completedLessons >= 10,
+    earned: completedLessons >= 15,
     color: 'from-purple-400 to-purple-600'
   },
   {
     id: 'legend',
     name: 'Academy Legend',
-    description: 'Complete 20 learning quests',
+    description: 'Complete 30 learning quests',
     icon: Crown,
-    earned: completedLessons >= 20,
+    earned: completedLessons >= 30,
     color: 'from-amber-400 to-orange-500'
   },
   {
@@ -53,9 +53,9 @@ export const getAchievements = (completedLessons: number, totalAchievements: num
   {
     id: 'exam-master',
     name: 'Boss Slayer',
-    description: 'Complete 3 boss battles',
+    description: 'Complete 15 boss battles',
     icon: Zap,
-    earned: totalAchievements >= 3,
+    earned: totalAchievements >= 15,
     color: 'from-yellow-400 to-orange-500'
   },
   {
@@ -85,9 +85,9 @@ export const getAchievements = (completedLessons: number, totalAchievements: num
   {
     id: 'streak-master',
     name: 'Streak Master',
-    description: 'Complete quests for 30 consecutive days',
+    description: 'Complete quests for 50 consecutive days',
     icon: Crown,
-    earned: completedLessons >= 30,
+    earned: completedLessons >= 50,
     color: 'from-purple-400 to-pink-500'
   },
   {
@@ -189,9 +189,9 @@ export const getAchievements = (completedLessons: number, totalAchievements: num
   {
     id: 'mentor',
     name: 'Mentor',
-    description: 'Help 5 other students complete their first quest',
+    description: 'Help 15 other students complete their first quest',
     icon: Crown,
-    earned: completedLessons >= 10,
+    earned: completedLessons >= 15,
     color: 'from-purple-400 to-indigo-500'
   },
   {
@@ -1093,33 +1093,33 @@ export const getAchievements = (completedLessons: number, totalAchievements: num
   {
     id: 'legendary-learner',
     name: 'Legendary Learner',
-    description: 'Become a legend in the academy through exceptional dedication',
+    description: 'Become a legend in the academy through exceptional dedication (100 lessons)',
     icon: Star,
-    earned: completedLessons >= 50,
+    earned: completedLessons >= 100,
     color: 'from-amber-400 to-orange-500'
   },
   {
     id: 'mythical-master',
     name: 'Mythical Master',
-    description: 'Achieve mythical status through unparalleled excellence',
+    description: 'Achieve mythical status through unparalleled excellence (200 lessons)',
     icon: Crown,
-    earned: completedLessons >= 100,
+    earned: completedLessons >= 200,
     color: 'from-purple-400 to-pink-500'
   },
   {
     id: 'divine-doctor',
     name: 'Divine Doctor',
-    description: 'Reach the highest level of academic achievement',
+    description: 'Reach the highest level of academic achievement (500 lessons)',
     icon: Trophy,
-    earned: completedLessons >= 200,
+    earned: completedLessons >= 500,
     color: 'from-yellow-400 to-amber-500'
   },
   {
     id: 'cosmic-captain',
     name: 'Cosmic Captain',
-    description: 'Command the universe of knowledge with wisdom',
+    description: 'Command the universe of knowledge with wisdom (1000 lessons)',
     icon: Shield,
-    earned: completedLessons >= 500,
+    earned: completedLessons >= 1000,
     color: 'from-indigo-400 to-purple-500'
   },
   {

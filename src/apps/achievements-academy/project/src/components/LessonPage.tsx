@@ -112,7 +112,7 @@ const LessonPage: React.FC<LessonPageProps> = ({
               <h3 className="text-lg sm:text-2xl font-bold text-blue-900 mb-4 sm:mb-6">
                 ⚡ Interactive Magic Exercise
               </h3>
-              <p className="text-blue-800 text-sm sm:text-lg font-medium">
+              <p className="text-blue-800 text-sm sm:text-xl font-medium">
                 {content.content}
               </p>
             </div>

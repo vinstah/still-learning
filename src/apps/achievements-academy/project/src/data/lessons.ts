@@ -1,4 +1,5 @@
 import { Subject, YearLevel, Lesson, ExamQuestion } from '../types';
+import { allMathLessons } from './lessons/index';
 
 export const subjects: Subject[] = [
   {
@@ -2353,15 +2354,15 @@ export const createYearLevels = (): { [subject: string]: YearLevel[] } => {
 
   // Create 13 years for each subject with comprehensive content
   for (let year = 1; year <= 13; year++) {
-    // Mathematics years
+    // Mathematics years: use all topic-based lessons for all years
     const mathYear: YearLevel = {
       year,
-      lessons: createMathLessons(year),
+      lessons: allMathLessons, // Use all topic-based lessons
       examQuestions: createMathExamQuestions(year),
       progress: 0
     };
 
-    // English years
+    // English years (unchanged)
     const englishYear: YearLevel = {
       year,
       lessons: createEnglishLessons(year),
@@ -2375,3 +2376,28 @@ export const createYearLevels = (): { [subject: string]: YearLevel[] } => {
 
   return years;
 };
+
+// New loader for math lessons
+export const getAllMathLessons = (): Lesson[] => allMathLessons;
+
+export const getMathLessonById = (id: string): Lesson | undefined => allMathLessons.find((lesson: Lesson) => lesson.id === id);
+
+// TODO: Add similar loaders for English and other subjects as you split them by topic
+
+export const getAllLessonsBySubjectAndYear = (subject: string, year: number): Lesson[] => {
+  if (subject === 'mathematics') {
+    const yearPattern = new RegExp(`-y${year}-l`);
+    return allMathLessons.filter(lesson => yearPattern.test(lesson.id));
+  } else if (subject === 'english') {
+    return createEnglishLessons(year);
+  }
+  // Add more subjects as needed
+  return [];
+};
+
+// Deprecated: use getAllLessonsBySubjectAndYear instead
+export const getAllLessonsByYear = (year: number): Lesson[] => {
+  return getAllLessonsBySubjectAndYear('mathematics', year);
+};
+
+export { createMathExamQuestions, createEnglishExamQuestions };

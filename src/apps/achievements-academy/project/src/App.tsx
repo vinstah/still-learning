@@ -11,7 +11,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { useAuth } from './contexts/AuthContext';
 import { useRoles } from './hooks/useRoles';
-import { subjects, createYearLevels } from './data/lessons';
+import { subjects, getAllLessonsBySubjectAndYear, createMathExamQuestions, createEnglishExamQuestions } from './data/lessons';
 import { NavigationState, YearLevel, Lesson } from './types';
 
 function AppContent() {
@@ -24,7 +24,6 @@ function AppContent() {
   });
   
   const [currentView, setCurrentView] = useState<'dashboard' | 'subject' | 'year' | 'lesson' | 'exam' | 'teacher'>('dashboard');
-  const [yearLevels] = useState(() => createYearLevels());
   const [currentLessonData, setCurrentLessonData] = useState<Lesson | null>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showRoleSelector, setShowRoleSelector] = useState(false);
@@ -78,11 +77,8 @@ function AppContent() {
 
   const handleLessonSelect = (lessonId: string) => {
     if (!navigationState.currentSubject || !navigationState.currentYear) return;
-    
-    const subjectYears = yearLevels[navigationState.currentSubject];
-    const yearData = subjectYears.find(y => y.year === navigationState.currentYear);
-    const lesson = yearData?.lessons.find(l => l.id === lessonId);
-    
+    const lessons = getAllLessonsBySubjectAndYear(navigationState.currentSubject, navigationState.currentYear);
+    const lesson = lessons.find(l => l.id === lessonId);
     if (lesson) {
       setCurrentLessonData(lesson);
       setNavigationState(prev => ({
@@ -136,13 +132,35 @@ function AppContent() {
   const currentSubject = navigationState.currentSubject 
     ? subjects.find(s => s.id === navigationState.currentSubject)
     : null;
-  
+
+  const currentLessons = navigationState.currentSubject && navigationState.currentYear
+    ? getAllLessonsBySubjectAndYear(navigationState.currentSubject, navigationState.currentYear)
+    : [];
+
   const currentYearData = navigationState.currentSubject && navigationState.currentYear
-    ? yearLevels[navigationState.currentSubject].find(y => y.year === navigationState.currentYear)
+    ? {
+        year: navigationState.currentYear,
+        lessons: currentLessons,
+        examQuestions: navigationState.currentSubject === 'mathematics'
+          ? createMathExamQuestions(navigationState.currentYear)
+          : navigationState.currentSubject === 'english'
+            ? createEnglishExamQuestions(navigationState.currentYear)
+            : [],
+        progress: 0
+      }
     : null;
 
-  const currentSubjectYears = navigationState.currentSubject 
-    ? yearLevels[navigationState.currentSubject]
+  const currentSubjectYears = navigationState.currentSubject
+    ? Array.from({ length: 13 }, (_, i) => ({
+        year: i + 1,
+        lessons: getAllLessonsBySubjectAndYear(navigationState.currentSubject!, i + 1),
+        examQuestions: navigationState.currentSubject === 'mathematics'
+          ? createMathExamQuestions(i + 1)
+          : navigationState.currentSubject === 'english'
+            ? createEnglishExamQuestions(i + 1)
+            : [],
+        progress: 0
+      }))
     : [];
 
   // Show loading while checking roles

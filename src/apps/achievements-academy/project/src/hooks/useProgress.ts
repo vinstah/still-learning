@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
+import { useGameStore } from '../store/gameStore';
 
 export interface UserProgress {
   lessonId: string;
@@ -24,6 +25,9 @@ export const useProgress = () => {
   const [progress, setProgress] = useState<UserProgress[]>([]);
   const [examScores, setExamScores] = useState<ExamScore[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Add game store
+  const updateUserTokens = useGameStore(state => state.updateUserTokens);
 
   useEffect(() => {
     if (user) {
@@ -134,6 +138,10 @@ export const useProgress = () => {
           ];
         }
       });
+
+      // Award points/tokens via game store
+      const points = Math.round((9 / 5) * (yearLevel + 1));
+      updateUserTokens(points);
     } catch (error) {
       console.error('Error marking lesson complete:', error);
     }
